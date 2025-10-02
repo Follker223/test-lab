@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Дослідження console.*()</title>
+<script>
+function testConsoleMethods() {
+  let user = {name: "Олег", age: 22, skills: ["JS", "HTML", "CSS"]};
+
+  console.info("Це інформаційне повідомлення: user створено");
+
+  console.warn("Увага! Це попередження про можливу проблему");
+
+  console.error("Це приклад повідомлення про помилку");
+
+  console.dir(user);
+
+  console.dirxml(document.body);
+
+  console.time("Обчислення");
+  let sum = 0;
+  for (let i = 0; i < 1e6; i++) {
+    sum += i;
+  }
+  console.timeEnd("Обчислення");
+
+  console.profile("MyProfile");
+  for (let i = 0; i < 1e6; i++) {
+    Math.sqrt(i);
+  }
+  console.profileEnd("MyProfile");
+
+  let x = 10;
+  console.assert(x % 2 === 0, "x не є парним числом"); // не покаже помилку
+  console.assert(x > 20, "x не більше 20"); // покаже повідомлення
+}
+</script>
+</head>
+<body onload="testConsoleMethods()">
+  <h3>Відкрийте консоль F12</h3>
+</body>
+</html>

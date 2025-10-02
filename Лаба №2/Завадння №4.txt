@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Дослідження console.log()</title>
+<script>
+function testConsole() {
+  let a = 17;
+  let b = 5;
+
+  let remainder = a % b;
+  console.log("Остача від ділення %d на %d = %d", a, b, remainder);
+
+  console.log("Чи %d ділиться на %d без остачі? -> %s", a, b, (remainder === 0));
+
+  let arr = [10, 20, 30];
+  console.log("Значення масиву: %d, %d, %d", arr[0], arr[1], arr[2]);
+  console.log("Перший елемент масиву як рядок: %s", arr[0]);
+  console.log("Другий елемент масиву як число: %d", arr[1]);
+}
+</script>
+</head>
+<body onload="testConsole()">
+  <h3>Відкрийте консоль F12 </h3>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Завдання 7 – Товари із випадаючого списку</title>
+<script>
+    
+    let product = ["Валіза", "Віник", "Вилка", "Журнал", "Жабка", "Жилет"];
+    let quantity = [10, 50, 30, 15, 20, 5];
+    let cost = [500, 25, 12, 60, 8, 120];
+
+    
+    let currentIndex = -1;
+
+    
+    function fun1() {
+        let select = document.getElementById("productSelect");
+        currentIndex = select.selectedIndex;
+
+        if (currentIndex !== -1) {
+            document.getElementById("output_quantity").value = quantity[currentIndex];
+            document.getElementById("output_cost").value = cost[currentIndex];
+        } else {
+            document.getElementById("output_quantity").value = "Товар не вибрано";
+            document.getElementById("output_cost").value = "Товар не вибрано";
+        }
+    }
+
+    
+    function fun2() {
+        if (currentIndex !== -1) {
+            let total = quantity[currentIndex] * cost[currentIndex];
+            document.getElementById("output_total").value = 
+                "Загальна сума для " + product[currentIndex] + " = " + total;
+        } else {
+            document.getElementById("output_total").value = "Спочатку виберіть товар!";
+        }
+    }
+</script>
+</head>
+<body>
+<h2>Завдання 7 – Склад товарів із випадаючого списку</h2>
+<form name="form1">
+    Виберіть товар: 
+    <select id="productSelect">
+        <option>Валіза</option>
+        <option>Віник</option>
+        <option>Вилка</option>
+        <option>Журнал</option>
+        <option>Жабка</option>
+        <option>Жилет</option>
+    </select>
+    <input type="button" value="Наявна кількість і вартість" onclick="fun1()">
+    <br><br>
+    Кількість на складі: <input type="text" size="30" id="output_quantity" readonly>
+    Вартість за одиницю: <input type="text" size="30" id="output_cost" readonly>
+    <br><br>
+    <input type="button" value="Загальна сума" onclick="fun2()">
+    <br><br>
+    Результат: <input type="text" size="70" id="output_total" readonly>
+</form>
+</body>
+</html>
