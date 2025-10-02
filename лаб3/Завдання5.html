@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <title>Арифметичні завдання</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { margin-bottom: 10px; }
+    .task { font-size: 20px; margin: 10px 0; }
+    input { font-size: 18px; width: 80px; margin-left: 10px; }
+    button { font-size: 16px; margin: 8px; padding: 5px 12px; cursor: pointer; }
+    .result { margin-top: 10px; font-weight: bold; }
+    .score { margin-top: 15px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h2>Арифметичні завдання</h2>
+  
+  <div id="task" class="task"></div>
+  <input type="number" id="answer">
+  <br>
+  <button onclick="checkAnswer()">Перевірити</button>
+  <button onclick="nextTask()">Наступне завдання</button>
+  
+  <div id="result" class="result"></div>
+  <div id="score" class="score"></div>
+  
+  <script>
+    let num1, num2, operator, correctAnswer;
+    let totalTasks = 5;
+    let currentTask = 0;
+    let correctCount = 0;
+
+    function generateTask() {
+      num1 = Math.floor(Math.random() * 10);
+      num2 = Math.floor(Math.random() * 10);
+      let operators = ['+', '-', '*', '/'];
+      operator = operators[Math.floor(Math.random() * operators.length)];
+      
+      if (operator === '/' && num2 === 0) num2 = 1; 
+      
+      correctAnswer = eval(num1 + operator + num2);
+      if (operator === '/') correctAnswer = parseFloat(correctAnswer.toFixed(2));
+      document.getElementById("task").innerHTML = `${num1} ${operator} ${num2} = `;
+      document.getElementById("answer").value = "";
+      document.getElementById("result").innerHTML = "";
+    }
+
+    function checkAnswer() {
+      let userAnswer = document.getElementById("answer").value;
+      if (userAnswer === "") return;
+      
+      if (parseFloat(userAnswer) === correctAnswer) {
+        document.getElementById("result").innerHTML = "Правильно";
+        correctCount++;
+      } else {
+        document.getElementById("result").innerHTML = `Помилка, правильна відповідь «${correctAnswer}»`;
+      }
+    }
+
+    function nextTask() {
+      currentTask++;
+      if (currentTask < totalTasks) {
+        generateTask();
+      } else {
+        let percent = Math.round((correctCount / totalTasks) * 100);
+        document.getElementById("task").innerHTML = "Завдання завершені ";
+        document.getElementById("answer").style.display = "none";
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("score").innerHTML = 
+          `Загальний рахунок ${percent}% (${correctCount} правильних відповідей з ${totalTasks})`;
+      }
+    }
+
+    generateTask();
+  </script>
+</body>
+</html>

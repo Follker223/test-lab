@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Ієрархія фруктів та овочів</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li span {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<h3>Завдання 6</h3>
+<p>Створити дерево для показу ієрархії.</p>
+
+<ul>
+  <li>
+    <span onclick="toggleList(this)">fruits</span>
+    <ul class="hidden">
+      <li>apple</li>
+      <li>pineapple</li>
+      <li>apricot</li>
+      <li>pear</li>
+      <li>lemon</li>
+    </ul>
+  </li>
+  <li>
+    <span onclick="toggleList(this)">vegetables</span>
+    <ul class="hidden">
+      <li>potatoes</li>
+      <li>beetroot</li>
+      <li>carrots</li>
+      <li>pear</li>
+    </ul>
+  </li>
+</ul>
+
+<script>
+  function toggleList(element) {
+    const ul = element.nextElementSibling;
+    if (ul) {
+      ul.classList.toggle('hidden');
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <title>Площа паралелограма</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    label { display: inline-block; width: 100px; margin: 5px 0; }
+    input { width: 80px; padding: 4px; }
+    .row { margin: 8px 0; }
+    .result { margin-top: 12px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Розрахунок площі паралелограма (Варіант 24)</h2>
+
+  <!-- Введення основи паралелограма -->
+  <div class="row">
+    <label for="base">Основа (a)</label>
+    <input type="number" id="base" value="5" min="0">
+  </div>
+
+  <!-- Введення висоти паралелограма -->
+  <div class="row">
+    <label for="height">Висота (h)</label>
+    <input type="number" id="height" value="3" min="0">
+  </div>
+
+  <!-- Вивід площі -->
+  <div class="result">
+    Площа: <span id="area">0</span>
+  </div>
+
+  <script>
+    // Отримуємо посилання на DOM-елементи
+    const baseInput = document.getElementById('base');
+    const heightInput = document.getElementById('height');
+    const areaOutput = document.getElementById('area');
+
+    // Функція обчислення площі паралелограма
+    function calculateArea() {
+      const a = parseFloat(baseInput.value) || 0;
+      const h = parseFloat(heightInput.value) || 0;
+      const area = a * h;  // формула площі паралелограма
+      areaOutput.textContent = area;
+    }
+
+    // Обчислюємо при зміні будь-якого поля
+    baseInput.addEventListener('input', calculateArea);
+    heightInput.addEventListener('input', calculateArea);
+
+    // Обчислюємо при завантаженні сторінки
+    calculateArea();
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <title>Екранна клавіатура</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea {
+      width: 100%; 
+      height: 120px; 
+      margin-bottom: 15px; 
+      font-size: 18px; 
+      padding: 10px;
+    }
+    .keyboard { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .row { display: flex; gap: 6px; }
+    button {
+      padding: 10px 14px; 
+      font-size: 16px; 
+      cursor: pointer; 
+      border: 1px solid #999;
+      border-radius: 5px;
+      background: #f0f0f0;
+    }
+    button:hover { background: #ddd; }
+    .clear-btn {
+      background: #ffcccc;
+      font-weight: bold;
+    }
+    .clear-btn:hover { background: #ff9999; }
+  </style>
+</head>
+<body>
+  <h2>Екранна клавіатура</h2>
+  <textarea id="output"></textarea>
+
+  <div class="keyboard" id="keyboard"></div>
+
+  <script>
+    // Масив цифр та літер українського алфавіту
+    let digits = ['0','1','2','3','4','5','6','7','8','9'];
+    let letters = [
+      'а','б','в','г','ґ','д','е','є','ж','з','и',
+      'і','ї','й','к','л','м','н','о','п','р','с',
+      'т','у','ф','х','ц','ч','ш','щ','ь','ю','я'
+    ];
+
+    const keyboardDiv = document.getElementById('keyboard');
+    const output = document.getElementById('output');
+
+    // Функція створення рядка клавіш
+    function createRow(symbols) {
+      const row = document.createElement('div');
+      row.className = 'row';
+      symbols.forEach(sym => {
+        const btn = document.createElement('button');
+        btn.textContent = sym;
+        btn.addEventListener('click', () => {
+          output.value += sym;
+        });
+        row.appendChild(btn);
+      });
+      return row;
+    }
+
+    // 1 рядок — цифри
+    keyboardDiv.appendChild(createRow(digits));
+
+    // Літери розбиваємо на 3 рядки
+    const row1 = letters.slice(0,11);
+    const row2 = letters.slice(11,22);
+    const row3 = letters.slice(22);
+
+    keyboardDiv.appendChild(createRow(row1));
+    keyboardDiv.appendChild(createRow(row2));
+    keyboardDiv.appendChild(createRow(row3));
+
+    // Кнопка очистки
+    const clearRow = document.createElement('div');
+    clearRow.className = 'row';
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = 'Очистити поле';
+    clearBtn.className = 'clear-btn';
+    clearBtn.addEventListener('click', () => {
+      output.value = '';
+    });
+    clearRow.appendChild(clearBtn);
+    keyboardDiv.appendChild(clearRow);
+  </script>
+</body>
+</html>
