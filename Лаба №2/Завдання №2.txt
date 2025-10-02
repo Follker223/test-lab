@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Простий калькулятор</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f3f3f3;
+    }
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #output {
+      width: 100%;
+      height: 40px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    .btn {
+      width: 60px;
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="output" disabled>
+    <br>
+    <button class="btn" onclick="press('7')">7</button>
+    <button class="btn" onclick="press('8')">8</button>
+    <button class="btn" onclick="press('9')">9</button>
+    <button class="btn" onclick="press('/')">/</button>
+    <br>
+    <button class="btn" onclick="press('4')">4</button>
+    <button class="btn" onclick="press('5')">5</button>
+    <button class="btn" onclick="press('6')">6</button>
+    <button class="btn" onclick="press('*')">*</button>
+    <br>
+    <button class="btn" onclick="press('1')">1</button>
+    <button class="btn" onclick="press('2')">2</button>
+    <button class="btn" onclick="press('3')">3</button>
+    <button class="btn" onclick="press('-')">-</button>
+    <br>
+    <button class="btn" onclick="press('0')">0</button>
+    <button class="btn" onclick="press('.')">.</button>
+    <button class="btn" onclick="calculate()">=</button>
+    <button class="btn" onclick="press('+')">+</button>
+    <br>
+    <button class="btn" style="width: 250px;" onclick="clearOutput()">C</button>
+  </div>
+
+  <script>
+    function press(symbol) {
+      document.getElementById("output").value += symbol;
+    }
+
+    function calculate() {
+      try {
+        document.getElementById("output").value = eval(document.getElementById("output").value);
+      } catch {
+        document.getElementById("output").value = "Error";
+      }
+    }
+
+    function clearOutput() {
+      document.getElementById("output").value = "";
+    }
+  </script>
+</body>
+</html>
