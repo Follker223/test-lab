@@ -41,111 +41,74 @@ input {
 </head>
 <body>
 
-<h1>Лабораторна робота: Робота з рядками (Варіант 5)</h1>
+<h1>Лабораторна робота: Робота з рядками (Варіант 4)</h1>
 
-<!-- Завдання 1 -->
+<!-- ===== Завдання 1–7 ===== -->
+
 <h2>Завдання 1. Довжина рядка</h2>
 <input type="text" id="str1" placeholder="Введіть рядок">
 <button onclick="task1()">Порахувати довжину</button>
 <div id="res1" class="result"></div>
 
-<!-- Завдання 2 -->
 <h2>Завдання 2. Верхній і нижній регістр</h2>
 <input type="text" id="str2" placeholder="Введіть рядок">
 <button onclick="task2()">Перетворити</button>
 <div id="res2" class="result"></div>
 
-<!-- Завдання 3 -->
 <h2>Завдання 3. Індекс символу</h2>
 <input type="text" id="str3" placeholder="Введіть рядок">
 <input type="text" id="char3" placeholder="Введіть символ">
 <button onclick="task3()">Знайти індекс</button>
 <div id="res3" class="result"></div>
 
-<!-- Завдання 4 -->
 <h2>Завдання 4. Кількість входжень символу</h2>
 <input type="text" id="str4" placeholder="Введіть рядок">
 <input type="text" id="char4" placeholder="Введіть символ">
 <button onclick="task4()">Порахувати</button>
 <div id="res4" class="result"></div>
 
-<!-- Завдання 5 -->
 <h2>Завдання 5. Заміна місцями сусідніх символів</h2>
 <input type="text" id="str5" placeholder="Введіть рядок">
 <button onclick="task5()">Замінити</button>
 <div id="res5" class="result"></div>
 
-<!-- Завдання 6 -->
 <h2>Завдання 6. Перевірка спаму</h2>
 <input type="text" id="str6" placeholder="Введіть текст">
 <button onclick="task6()">Перевірити</button>
 <div id="res6" class="result"></div>
 
-<!-- Завдання 7 -->
 <h2>Завдання 7. Скорочення рядка</h2>
 <input type="text" id="str7" placeholder="Введіть рядок">
 <input type="number" id="max7" placeholder="Максимальна довжина">
 <button onclick="task7()">Скоротити</button>
 <div id="res7" class="result"></div>
 
-<!-- Варіант 4 -->
-<h2>Варіант 4. Робота з підрядками</h2>
+<!-- ===== Варіант 4 ===== -->
 
-<h3>1. Знайти всі підрядки з певною довжиною</h3>
-<input type="text" id="str10a" placeholder="Рядок">
-<input type="number" id="len10a" placeholder="Довжина">
-<button onclick="task10a()">Знайти</button>
-<div id="res10a" class="result"></div>
+<h2>Варіант 4. Додаткові завдання</h2>
 
-<h3>2. Найбільший спільний префікс</h3>
-<input type="text" id="arr10b" placeholder='Рядки через кому (напр. flower,flow,flight)'>
-<button onclick="task10b()">Знайти</button>
-<div id="res10b" class="result"></div>
+<!-- Завдання 8 -->
+<h3>8. Перевірка, чи є рядки анаграмами (приклад: "listen", "silent")</h3>
+<input type="text" id="str8a" placeholder="Перший рядок">
+<input type="text" id="str8b" placeholder="Другий рядок">
+<button onclick="task8()">Перевірити</button>
+<div id="res8" class="result"></div>
 
-<h3>3. Підрядок-паліндром (мін. 3 символи)</h3>
-<input type="text" id="str10c" placeholder="Введіть рядок">
-<button onclick="task10c()">Перевірити</button>
-<div id="res10c" class="result"></div>
+<!-- Завдання 9 -->
+<h3>9. Перевірка наявності підрядка (Приклад: JavaScript is awesome", "Script")</h3>
+<input type="text" id="str9a" placeholder="Основний рядок">
+<input type="text" id="str9b" placeholder="Підрядок">
+<button onclick="task9()">Перевірити</button>
+<div id="res9" class="result"></div>
 
-<h3>4. Замінити заборонені слова на *</h3>
-<input type="text" id="str10d" placeholder="Введіть рядок">
-<button onclick="task10d()">Замінити</button>
-<div id="res10d" class="result"></div>
-
-<h3>5. Перший підрядок, який повторюється більше одного разу</h3>
-<input type="text" id="str10e" placeholder="Введіть рядок">
-<button onclick="task10e()">Знайти</button>
-<div id="res10e" class="result"></div>
-
-<h3>6. Підрядок, який повторюється найбільше разів</h3>
-<input type="text" id="str10f" placeholder="Введіть рядок">
-<button onclick="task10f()">Знайти</button>
-<div id="res10f" class="result"></div>
-
-<h3>7. Чи є підрядок-анаграма іншого</h3>
-<input type="text" id="str10g1" placeholder="Перший рядок">
-<input type="text" id="str10g2" placeholder="Другий рядок">
-<button onclick="task10g()">Перевірити</button>
-<div id="res10g" class="result"></div>
-
-<h3>8. Чи містить рядок однакові літери (мін. 3)</h3>
-<input type="text" id="str10h" placeholder="Введіть рядок">
-<button onclick="task10h()">Перевірити</button>
-<div id="res10h" class="result"></div>
-
-<h3>9. Найменший підрядок, який містить усі літери іншого рядка</h3>
-<input type="text" id="str10i1" placeholder="Основний рядок">
-<input type="text" id="str10i2" placeholder="Набір символів">
-<button onclick="task10i()">Знайти</button>
-<div id="res10i" class="result"></div>
-
-<h3>10. Підрядок з однакових символів (мін. 3)</h3>
-<input type="text" id="str10j" placeholder="Введіть рядок">
-<button onclick="task10j()">Знайти</button>
-<div id="res10j" class="result"></div>
+<!-- Завдання 10 -->
+<h3>10. Замінити заборонені слова на *</h3>
+<input type="text" id="str10" placeholder="Введіть рядок">
+<button onclick="task10()">Замінити</button>
+<div id="res10" class="result"></div>
 
 <script>
-// ===== Базові завдання =====
+// ===== Базові завдання (1–7) =====
 function task1() {
   let s = document.getElementById("str1").value;
   document.getElementById("res1").innerText = "Довжина: " + s.length;
@@ -186,95 +149,39 @@ function task7() {
   document.getElementById("res7").innerText = "Результат: " + s;
 }
 
-// ===== Варіант 4 =====
-function task10a() {
-  let s = document.getElementById("str10a").value;
-  let n = Number(document.getElementById("len10a").value);
-  let res = [];
-  for (let i = 0; i <= s.length - n; i++) res.push(s.slice(i, i + n));
-  document.getElementById("res10a").innerText = "Підрядки: " + res.join(", ");
+// 8. Перевірка анаграм
+function task8() {
+  let str1 = document.getElementById("str8a").value;
+  let str2 = document.getElementById("str8b").value;
+
+  let clean1 = str1.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+  let clean2 = str2.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+
+  let result = clean1 === clean2;
+  document.getElementById("res8").innerText = "Є анаграмою: " + result;
 }
-function task10b() {
-  let arr = document.getElementById("arr10b").value.split(",");
-  let prefix = arr[0];
-  for (let str of arr)
-    while (!str.startsWith(prefix)) {
-      prefix = prefix.slice(0, -1);
-      if (!prefix) break;
-    }
-  document.getElementById("res10b").innerText = "Спільний префікс: " + prefix;
+
+// 9. Пошук підрядка
+function task9() {
+  let mainStr = document.getElementById("str9a").value;
+  let subStr = document.getElementById("str9b").value;
+  let index = mainStr.indexOf(subStr);
+
+  if (index !== -1)
+    document.getElementById("res9").innerText = `Підрядок знайдено, індекс: ${index}`;
+  else
+    document.getElementById("res9").innerText = "Підрядок не знайдено.";
 }
-function task10c() {
-  let s = document.getElementById("str10c").value;
-  let found = false;
-  for (let i = 0; i < s.length; i++)
-    for (let j = i + 3; j <= s.length; j++) {
-      let sub = s.slice(i, j);
-      if (sub === [...sub].reverse().join("")) found = true;
-    }
-  document.getElementById("res10c").innerText = "Є паліндром: " + found;
-}
-function task10d() {
-  let s = document.getElementById("str10d").value;
-  let bad = ["badword", "stupid", "ugly"];
-  for (let w of bad) {
+
+// 10. Замінити заборонені слова
+function task10() {
+  let s = document.getElementById("str10").value;
+  let badWords = ["badword", "stupid", "ugly"];
+  for (let w of badWords) {
     let masked = w[0] + "*".repeat(w.length - 2) + w[w.length - 1];
     s = s.replace(new RegExp(w, "gi"), masked);
   }
-  document.getElementById("res10d").innerText = "Результат: " + s;
-}
-function task10e() {
-  let s = document.getElementById("str10e").value;
-  for (let i = 1; i < s.length; i++)
-    for (let j = 0; j + i <= s.length; j++) {
-      let sub = s.slice(j, j + i);
-      if (s.indexOf(sub) !== s.lastIndexOf(sub)) {
-        document.getElementById("res10e").innerText = "Перший повтор: " + sub;
-        return;
-      }
-    }
-  document.getElementById("res10e").innerText = "Повторів нема";
-}
-function task10f() {
-  let s = document.getElementById("str10f").value;
-  let best = "", max = 1;
-  for (let i = 0; i < s.length; i++)
-    for (let j = i + 1; j <= s.length; j++) {
-      let sub = s.slice(i, j);
-      let count = s.split(sub).length - 1;
-      if (count > 1 && sub.length > best.length) {
-        best = sub; max = count;
-      }
-    }
-  document.getElementById("res10f").innerText = "Найчастіше: " + best + " (" + max + ")";
-}
-function task10g() {
-  let s1 = document.getElementById("str10g1").value.split("").sort().join("");
-  let s2 = document.getElementById("str10g2").value.split("").sort().join("");
-  document.getElementById("res10g").innerText = "Анаграма: " + (s1 === s2);
-}
-function task10h() {
-  let s = document.getElementById("str10h").value;
-  let match = s.match(/(.)\1{2,}/);
-  document.getElementById("res10h").innerText = match ? `Є: ${match[0]}` : "Немає";
-}
-function task10i() {
-  let s = document.getElementById("str10i1").value;
-  let t = document.getElementById("str10i2").value;
-  let minSub = "";
-  for (let i = 0; i < s.length; i++)
-    for (let j = i + 1; j <= s.length; j++) {
-      let sub = s.slice(i, j);
-      if ([...t].every(ch => sub.includes(ch)))
-        if (minSub === "" || sub.length < minSub.length) minSub = sub;
-    }
-  document.getElementById("res10i").innerText = "Результат: " + (minSub || "немає");
-}
-function task10j() {
-  let s = document.getElementById("str10j").value;
-  let matches = s.match(/(.)\1{2,}/g);
-  document.getElementById("res10j").innerText =
-    matches ? "Є: " + matches.reduce((a,b)=>a.length>=b.length?a:b) : "Немає таких підрядків";
+  document.getElementById("res10").innerText = "Результат: " + s;
 }
 </script>
 </body>
