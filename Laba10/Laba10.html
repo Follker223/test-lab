@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна робота</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+.hoverDiv {
+    transition: 0.3s;
+    padding: 10px;
+    border: 1px solid transparent;
+}
+.hovered {
+    background: #f0f0f0;
+    border: 1px solid #555;
+}
+.clicked {
+    background: yellow;
+    border: 3px solid red;
+}
+#imgBox {
+    display: none;
+    width: 200px;
+    cursor: pointer;
+}
+#tooltip {
+    display: none;
+    background: black;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    font-size: 12px;
+}
+#hide_text {
+    display: none;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #333;
+    background: #eee;
+}
+.button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<h1>Завдання 1</h1>
+<a href="#" class="button">Натисніть, щоб показати текст</a>
+<div id="hide_text">Прихований текст</div>
+
+<hr>
+
+<h2>Завдання 2</h2>
+<p>Текст 1</p>
+<p>Текст 2</p>
+<div class="hoverDiv">Наведи мишкою</div>
+
+<hr>
+
+<h2>Завдання 3</h2>
+<div id="clickDiv" style="width:200px; height:100px; background:#ddd; cursor:pointer;">
+    Клікни або подвійно клікни
+</div>
+
+<br>
+<button id="btn1">Кнопка 1</button>
+<button id="btn2">Кнопка 2</button>
+
+<br><br>
+<div id="showImg" style="cursor:pointer; color:blue;">Показати зображення</div>
+<img id="imgBox" src="Supra1.jpg">
+<div id="tooltip"></div>
+
+<hr>
+<p>Введіть слово 'correct'</p>
+<form action="#">
+    <input type="text">
+    <input type="submit" value="Перевірити">
+</form>
+<span style="color:red; font-weight:bold;"></span>
+
+<script>
+$(document).ready(function(){
+    alert("Бібліотека jQuery готова до роботи!");
+
+    // Завдання 1
+    $('#hide_text').hide();
+    $('.button').click(function(e){
+        e.preventDefault();
+        $('#hide_text').show(200);
+    });
+
+    // Завдання 2
+    $("p:first").text("DOM first!");
+    $("p:last").text("DOM last!");
+
+    $(".hoverDiv").hover(
+        function(){ $(this).addClass("hovered"); },
+        function(){ $(this).removeClass("hovered"); }
+    );
+
+    // Завдання 3
+    $("#clickDiv").click(function(){ $(this).addClass("clicked"); });
+    $("#clickDiv").dblclick(function(){ $(this).removeClass("clicked"); });
+
+    $("#btn1").click(function(){ alert("Одинарний клік"); });
+    $("#btn2").dblclick(function(){ alert("Подвійний клік"); });
+
+    $("#showImg").click(function(){ $("#imgBox").show(); });
+    $("#imgBox").click(function(){ $(this).hide(); $("#tooltip").hide(); });
+
+    $("#imgBox").mouseover(function(e){
+        $("#tooltip").text("Підпис до зображення").css({
+            top: e.pageY + 10,
+            left: e.pageX + 10
+        }).show();
+    });
+    $("#imgBox").mouseout(function(){ $("#tooltip").hide(); });
+
+    $("form").submit(function(){
+        if ($("input:first").val() == "correct"){
+            alert("Успішно!");
+            return true;
+        }
+        $("span").text("Неправильно!").show().fadeOut(1000);
+        return false;
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна робота</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+  h2 { margin-top: 30px; }
+  input, button { margin: 5px; padding: 5px; }
+  .output { margin-top: 10px; padding: 10px; background: #fff; border: 1px solid #ccc; width: fit-content; }
+</style>
+</head>
+<body>
+
+<h1>Лабораторна робота – Робота з датою, часом та класами</h1>
+
+<!--Завдання 1  -->
+<h2>Завдання 1. Робота з часом</h2>
+<div>
+  <button onclick="showCurrentTime()">Показати поточний час</button>
+  <div class="output" id="timeOutput"></div>
+
+  <br>
+  <label>Додати секунд:</label>
+  <input type="number" id="secondsToAdd">
+  <button onclick="addSeconds()">Змінити час</button>
+</div>
+
+<script>
+  // Об'єкт часу
+  let timeObj = { hours: 20, minutes: 30, seconds: 45 };
+
+  function showCurrentTime() {
+    document.getElementById('timeOutput').innerText = 
+      `${String(timeObj.hours).padStart(2,'0')}:${String(timeObj.minutes).padStart(2,'0')}:${String(timeObj.seconds).padStart(2,'0')}`;
+  }
+
+  function addSeconds() {
+    let sec = parseInt(document.getElementById('secondsToAdd').value);
+    if (isNaN(sec)) sec = 0;
+
+    let totalSeconds = timeObj.hours * 3600 + timeObj.minutes * 60 + timeObj.seconds + sec;
+    totalSeconds %= 24 * 3600; // обмежуємо 24 години
+
+    timeObj.hours = Math.floor(totalSeconds / 3600);
+    timeObj.minutes = Math.floor((totalSeconds % 3600) / 60);
+    timeObj.seconds = totalSeconds % 60;
+
+    showCurrentTime();
+  }
+</script>
+
+<!--Завдання 2  -->
+<h2>Завдання 2. Дата і час</h2>
+<div>
+  <p>Завдання 2.1. Виведення поточної дати, дня тижня і часу</p>
+  <button onclick="showDateTime()">Виконати</button>
+  <div class="output" id="dateOutput"></div>
+
+  <br>
+  <p>Завдання 2.2. Останній день місяця</p>
+  <label>Рік:</label><input type="number" id="yearInput">
+  <label>Місяць (1-12):</label><input type="number" id="monthInput">
+  <button onclick="lastDayOfMonth()">Показати останній день</button>
+  <div class="output" id="lastDayOutput"></div>
+
+  <br>
+  <p>Завдання 2.3. Секунди від початку та до кінця дня</p>
+  <button onclick="secondsToday()">Показати секунди</button>
+  <div class="output" id="secondsOutput"></div>
+</div>
+
+<script>
+  function showDateTime() {
+    const now = new Date();
+    const days = ['неділя','понеділок','вівторок','середа','четвер','пʼятниця','субота'];
+    const months = ['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+    
+    document.getElementById('dateOutput').innerText = 
+      `Дата: ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} року\n` +
+      `День тижня: ${days[now.getDay()]}\n` +
+      `Час: ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  }
+
+  function lastDayOfMonth() {
+    let year = parseInt(document.getElementById('yearInput').value);
+    let month = parseInt(document.getElementById('monthInput').value);
+
+    if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+      document.getElementById('lastDayOutput').innerText = "Невірні дані!";
+      return;
+    }
+
+    let lastDay = new Date(year, month, 0).getDate();
+    document.getElementById('lastDayOutput').innerText = `Останній день місяця: ${lastDay}`;
+  }
+
+  function secondsToday() {
+    const now = new Date();
+    const secondsPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+    const secondsRemaining = 24*3600 - secondsPassed;
+    document.getElementById('secondsOutput').innerText = 
+      `Секунд пройшло з початку дня: ${secondsPassed}\n` +
+      `Секунд до початку наступного дня: ${secondsRemaining}`;
+  }
+</script>
+
+<!--Завдання 3 і 4 -->
+<h2>Завдання 3 та 4.</h2>
+<div>
+  <label>Марка:</label><input type="text" id="brandInput">
+  <label>Модель:</label><input type="text" id="modelInput">
+  <label>Рік:</label><input type="number" id="yearInputCar">
+  <label>Батарея (kWh):</label><input type="number" id="batteryInput">
+  <button onclick="showCarInfo()">Показати інформацію</button>
+  <button onclick="clearCarFields()">Очистити поля</button>
+  <div class="output" id="carOutput"></div>
+</div>
+
+<script>
+  class Car {
+    constructor(brand, model, year) {
+      this.brand = brand;
+      this.model = model;
+      this.year = year;
+    }
+    info() {
+      return `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+    }
+  }
+
+  class ElectricCar extends Car {
+    constructor(brand, model, year, battery) {
+      super(brand, model, year);
+      this.battery = battery;
+    }
+    charge() {
+      return `${this.brand} ${this.model} заряджається... Батарея: ${this.battery} kWh`;
+    }
+  }
+
+  function showCarInfo() {
+    const brand = document.getElementById('brandInput').value;
+    const model = document.getElementById('modelInput').value;
+    const year = parseInt(document.getElementById('yearInputCar').value);
+    const battery = parseInt(document.getElementById('batteryInput').value);
+
+    let outputText = '';
+    if (battery) {
+      let eCar = new ElectricCar(brand, model, year, battery);
+      outputText = eCar.info() + '\n' + eCar.charge();
+    } else {
+      let car = new Car(brand, model, year);
+      outputText = car.info();
+    }
+
+    document.getElementById('carOutput').innerText = outputText;
+  }
+
+  function clearCarFields() {
+    document.getElementById('brandInput').value = '';
+    document.getElementById('modelInput').value = '';
+    document.getElementById('yearInputCar').value = '';
+    document.getElementById('batteryInput').value = '';
+    document.getElementById('carOutput').innerText = '';
+  }
+</script>
+
+<!--Завдання 5  -->
+<h2>Завдання 5. Статичний метод класу</h2>
+<div>
+  <label>Число 1:</label><input type="number" id="num1">
+  <label>Число 2:</label><input type="number" id="num2">
+  <button onclick="sumNumbers()">Показати суму</button>
+  <div class="output" id="sumOutput"></div>
+</div>
+
+<script>
+  class MathHelper {
+    static add(a, b) {
+      return a + b;
+    }
+  }
+
+  function sumNumbers() {
+    const a = parseFloat(document.getElementById('num1').value);
+    const b = parseFloat(document.getElementById('num2').value);
+    document.getElementById('sumOutput').innerText = `Сума: ${MathHelper.add(a,b)}`;
+  }
+</script>
+
+</body>
+</html>

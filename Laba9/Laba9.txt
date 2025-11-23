@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Анімована сторінка</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    height: 100%;
+  }
+
+  #logoText {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #00ffcc;
+    pointer-events: none;
+  }
+
+  button {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  canvas {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<div id="logoText"></div>
+<button onclick="toggleTextAnimation()">Показати/Сховати логотип</button>
+
+<script>
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let animationRunning = true;
+let textAnimationRunning = false;
+
+// ================= Фонова анімація ================= //
+class Shape {
+  constructor(x, y, size, dx, dy, type) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.dx = dx;
+    this.dy = dy;
+    this.type = type; // "circle" або "triangle"
+    this.color = `hsl(${Math.random()*360}, 70%, 50%)`;
+    this.angle = Math.random() * Math.PI * 2; // для трикутників
+  }
+
+  draw() {
+    ctx.save();
+    ctx.fillStyle = this.color;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    if (this.type === "circle") {
+      ctx.beginPath();
+      ctx.arc(0, 0, this.size, 0, Math.PI*2);
+      ctx.fill();
+    } else if (this.type === "triangle") {
+      ctx.beginPath();
+      ctx.moveTo(0, -this.size);
+      ctx.lineTo(this.size, this.size);
+      ctx.lineTo(-this.size, this.size);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+    this.angle += 0.02;
+    if (this.x > canvas.width + 50) this.x = -50;
+    if (this.x < -50) this.x = canvas.width + 50;
+    if (this.y > canvas.height + 50) this.y = -50;
+    if (this.y < -50) this.y = canvas.height + 50;
+  }
+}
+
+let shapes = [];
+for (let i = 0; i < 20; i++) {
+  let type = Math.random() > 0.5 ? "circle" : "triangle";
+  shapes.push(new Shape(Math.random()*canvas.width, Math.random()*canvas.height, 20 + Math.random()*20, 1 - Math.random()*2, 1 - Math.random()*2, type));
+}
+
+// Функція анімації фону
+function animateBackground() {
+  if (!animationRunning) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  shapes.forEach(s => {
+    s.update();
+    s.draw();
+  });
+  requestAnimationFrame(animateBackground);
+}
+animateBackground();
+
+// ================= Текстова анімація ================= //
+const logoTextStr = "Інженерія програмного забезпечення";
+let displayedText = "";
+let textIndex = 0;
+let textVisible = false;
+let textInterval;
+
+function animateText() {
+  if (!textVisible) return;
+
+  displayedText += logoTextStr[textIndex] || "";
+  textIndex++;
+  if (textIndex >= logoTextStr.length) {
+    clearInterval(textInterval);
+  }
+  document.getElementById('logoText').innerText = displayedText;
+}
+
+function toggleTextAnimation() {
+  if (!textAnimationRunning) {
+    textVisible = true;
+    displayedText = "";
+    textIndex = 0;
+    textInterval = setInterval(animateText, 100);
+  } else {
+    clearInterval(textInterval);
+    textVisible = false;
+    document.getElementById('logoText').innerText = "";
+  }
+  textAnimationRunning = !textAnimationRunning;
+}
+
+// ================= Підлаштування під розмір вікна ================= //
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
