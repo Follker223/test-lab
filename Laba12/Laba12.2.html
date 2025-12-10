@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Логотип ІПЗ</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+#logo {
+    width: 150px;
+    height: 150px;
+    background-color: #2196F3;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    position: relative;
+    margin: 50px;
+}
+</style>
+</head>
+<body>
+
+<div id="logo">ІПЗ</div>
+
+<script>
+$(document).ready(function(){
+
+    $("#logo").animate(
+        {
+            width: "300px",       
+            height: "300px",      
+            borderRadius: "50%", 
+            fontSize: "50px" 
+        },
+        {
+            duration: 2000,           
+            easing: "swing",          
+            complete: function(){     
+                alert("Анімація завершена!");
+            },
+            step: function(now, fx){  
+                console.log(fx.prop + ": " + now);
+            },
+            queue: true               
+        }
+    );
+
+});
+</script>
+
+</body>
+</html>

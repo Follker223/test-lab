@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Завдання 1</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+#box {
+    width: 150px;
+    height: 150px;
+    background-color: #4CAF50;
+    margin: 20px;
+    display: none;
+}
+</style>
+</head>
+<body>
+
+<button id="btnToggle">Toggle</button>
+<button id="btnFadeIn">Fade In</button>
+<button id="btnSlideDown">Slide Down</button>
+<button id="btnStop">Stop</button>
+
+<div id="box"></div>
+
+<script>
+$(document).ready(function(){
+
+    // Метод з твого варіанту
+    $("#btnToggle").click(function(){
+        $("#box").toggle(); // Показати або сховати блок
+    });
+
+    // Додаткові методи на вибір
+    $("#btnFadeIn").click(function(){
+        $("#box").fadeIn(1000); // Плавно з'являється за 1 сек
+    });
+
+    $("#btnSlideDown").click(function(){
+        $("#box").slideDown(1000); // Блок "сповзає" вниз
+    });
+
+    $("#btnStop").click(function(){
+        $("#box").stop(); // Зупиняє будь-яку поточну анімацію
+    });
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Демонстрація jQuery методів</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    .highlight { background-color: yellow; }
+    .modify { color: red; font-weight: bold; }
+    li { margin: 5px; }
+    button { margin: 5px; }
+</style>
+</head>
+<body>
+
+<h2>Завдання 1: .html(), .css(), .val(), .attr(), .removeAttr()</h2>
+<div id="task1">
+    <div id="div1">Текст у div</div>
+    <input type="text" id="input1" value="Початкове значення">
+    <button id="btnHtml">.html()</button>
+    <button id="btnCss">.css()</button>
+    <button id="btnVal">.val()</button>
+    <button id="btnAttrGet">.attr(name)</button>
+    <button id="btnAttrSet">.attr(name, value)</button>
+    <button id="btnAttrObj">.attr({})</button>
+    <button id="btnAttrFunc">.attr(name, function)</button>
+    <button id="btnRemoveAttr">.removeAttr()</button>
+</div>
+
+<h2>Завдання 2: .before(), .replaceWith(), .width(), .position()</h2>
+<div id="task2">
+    <div id="div2" style="background: lightblue;">Див для демонстрації</div>
+    <button id="btnBefore">.before()</button>
+    <button id="btnReplaceWith">.replaceWith()</button>
+    <button id="btnWidth">.width(function)</button>
+    <button id="btnPosition">.position()</button>
+</div>
+
+<h2>Завдання 3: .contents(), .map(), .prev(), .each(), .nextAll()</h2>
+<div id="task3">
+    <ul id="list3">
+        <li>Пункт 1</li>
+        <li>Пункт 2</li>
+        <li>Пункт 3</li>
+    </ul>
+    <button id="btnContents">.contents()</button>
+    <button id="btnMap">.map()</button>
+    <button id="btnPrev">.prev()</button>
+    <button id="btnEach">.each()</button>
+    <button id="btnNextAll">.nextAll()</button>
+</div>
+
+<h2>Завдання 4: .filter()</h2>
+<div id="task4">
+    <ul id="list4">
+        <li class="item">Елемент 1</li>
+        <li class="item">Елемент 2</li>
+        <li class="item">Елемент 3</li>
+        <li class="item">Елемент 4</li>
+        <li class="item">Елемент 5</li>
+    </ul>
+    <button id="btnFilterClass">.filter() клас</button>
+    <button id="btnFilterThird">.filter() кожен третій</button>
+</div>
+
+<h2>Завдання 5: $.noop()</h2>
+<div id="task5">
+    <button id="btnNoop">$.noop()</button>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    // Завдання 1
+    $('#btnHtml').click(function(){
+        $('#div1').html('Новий текст у div');
+    });
+
+    $('#btnCss').click(function(){
+        $('#div1').css({'color':'red','font-weight':'bold'});
+    });
+
+    $('#btnVal').click(function(){
+        alert('Значення input: ' + $('#input1').val());
+    });
+
+    $('#btnAttrGet').click(function(){
+        alert('type input: ' + $('#input1').attr('type'));
+    });
+
+    $('#btnAttrSet').click(function(){
+        $('#input1').attr('placeholder','Введіть текст тут');
+    });
+
+    $('#btnAttrObj').click(function(){
+        $('#input1').attr({'title':'Тут підказка', 'maxlength':'20'});
+    });
+
+    $('#btnAttrFunc').click(function(){
+        $('#input1').attr('value', function(i, val){
+            return val + ' + додано';
+        });
+    });
+
+    $('#btnRemoveAttr').click(function(){
+        $('#input1').removeAttr('maxlength');
+        alert('Атрибут maxlength видалено');
+    });
+
+    // Завдання 2
+    $('#btnBefore').click(function(){
+        $('#div2').before('<p>Текст перед div</p>');
+    });
+
+    $('#btnReplaceWith').click(function(){
+        $('#div2').replaceWith('<div style="background: pink;">Замінений div</div>');
+    });
+
+    $('#btnWidth').click(function(){
+        $('div').width(function(i, oldWidth){
+            return oldWidth + 20;
+        });
+    });
+
+    $('#btnPosition').click(function(){
+        var pos = $('#div2').position();
+        alert('Top: ' + pos.top + ', Left: ' + pos.left);
+    });
+
+    // Завдання 3
+    $('#btnContents').click(function(){
+        console.log($('#list3').contents());
+        alert('Подивіться консоль для результату .contents()');
+    });
+
+    $('#btnMap').click(function(){
+        var texts = $('#list3 li').map(function(){ return $(this).text(); }).get();
+        alert('Результат .map(): ' + texts.join(', '));
+    });
+
+    $('#btnPrev').click(function(){
+        alert('Попередній елемент: ' + $('#list3 li:last').prev().text());
+    });
+
+    $('#btnEach').click(function(){
+        $('#list3 li').each(function(i){
+            $(this).css('color', i%2==0 ? 'green':'blue');
+        });
+    });
+
+    $('#btnNextAll').click(function(){
+        $('#list3 li:first').nextAll().css('background','lightgray');
+    });
+
+    // Завдання 4
+    $('#btnFilterClass').click(function(){
+        $('.item').filter('.item').addClass('modify').text(function(i, txt){ return txt + ' modify'; });
+    });
+
+    $('#btnFilterThird').click(function(){
+        $('.item').filter(':nth-child(3n)').addClass('modify').text(function(i, txt){ return txt + ' modify'; });
+    });
+
+    // Завдання 5
+    $('#btnNoop').click($.noop);
+});
+</script>
+
+</body>
+</html>
